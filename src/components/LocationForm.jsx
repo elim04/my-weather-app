@@ -6,6 +6,7 @@ export default function LocationForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.getCityInfo(city);
+    setCity("");
   };
 
   return (
@@ -13,8 +14,8 @@ export default function LocationForm(props) {
       <input
         type="text"
         name="City"
-        placeholder="Enter City Name"
         value={city}
+        placeholder="Enter City Name"
         onChange={(event) => setCity(event.target.value)}
       ></input>
       <button type="submit">Get the weather!</button>

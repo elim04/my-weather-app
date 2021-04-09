@@ -30,6 +30,9 @@ function App() {
   return (
     <div className="App">
       {weatherData && <WeatherItem weatherData={weatherData} />}
+      {!weatherData && (
+        <div>Add a city to the form to search for today's weather!</div>
+      )}
       <LocationForm getCityInfo={getCityInfo} />
     </div>
   );
