@@ -8,8 +8,10 @@ import LocationForm from "./components/LocationForm";
 function App() {
   const [city, setCity] = useState();
   const [weatherData, setWeatherData] = useState();
+  const [errorMsg, setErrorMsg] = useState();
 
   useEffect(() => {
+    setErrorMsg("");
     if (city) {
       axios
         .get(
@@ -19,7 +21,12 @@ function App() {
           setWeatherData(res.data);
           console.log("success!", res.data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          setErrorMsg(
+            "Opps, that city doesn't exist or might have been typed wrong!"
+          );
+        });
     }
   }, [city]);
 
@@ -33,6 +40,7 @@ function App() {
       {!weatherData && (
         <div>Add a city to the form to search for today's weather!</div>
       )}
+      {errorMsg && <div>{errorMsg}</div>}
       <LocationForm getCityInfo={getCityInfo} />
     </div>
   );
